@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { AfterViewInit, Component, OnInit, ViewChild } from '@angular/core';
 
 import { MatTableDataSource } from '@angular/material/table';
 import { MatDialog } from '@angular/material/dialog';
@@ -18,7 +18,7 @@ import { deleteTodo, updateTodo } from '../../ngrx/todo.actions';
 })
 
 
-export class TodosComponent implements OnInit {
+export class TodosComponent implements AfterViewInit {
   displayedColumns: string[] = ['title','priority','expiration','state','menu'];
   todos:Todo[]=[];
   dataSource!:MatTableDataSource<Todo>;
@@ -29,8 +29,6 @@ export class TodosComponent implements OnInit {
     "PENDING":'accent',
   }
 
-  // uids:string[]=[]
-
   @ViewChild(MatPaginator) paginator!: MatPaginator;
 
   constructor(
@@ -38,7 +36,7 @@ export class TodosComponent implements OnInit {
     private store:Store<AppState>
     ){}
 
-  ngOnInit(): void {
+  ngAfterViewInit(): void {
     this.getTodos()
   }
 
